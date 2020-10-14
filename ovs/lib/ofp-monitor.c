@@ -832,8 +832,7 @@ struct ofpbuf *
 ofputil_encode_anomaly_detection(enum ofputil_protocol protocol)
 {
     enum ofp_version ofp_version = ofputil_protocol_to_ofp_version(protocol);
-    struct ofpbuf *buffer = ofpraw_alloc_xid(OFPRAW_OFPT_ANOMALY_DETECTION, ofp_version, htonl(0), 0);
-
+    struct ofpbuf *buffer = ofpraw_alloc_xid(OFPRAW_OFPT_ANOMALY_DETECTION, ofp_version, htonl(0), 1024);
     return buffer;
 }
 

@@ -288,8 +288,8 @@ am__append_24 = lib/async-append-aio.c
 #	lib/rtbsd.h \
 #	lib/route-table-bsd.c
 
-#am__append_27 = lib/stream-ssl.c lib/dhparams.c
-am__append_28 = lib/stream-nossl.c
+am__append_27 = lib/stream-ssl.c lib/dhparams.c
+#am__append_28 = lib/stream-nossl.c
 #am__append_29 = lib/dns-resolve.c
 am__append_30 = lib/dns-resolve-stub.c
 #am__append_31 = ${PTHREAD_LIBS}
@@ -318,9 +318,9 @@ am__append_44 = \
 am__append_45 = \
 	tests/test-netlink-conntrack.c
 
-#am__append_46 = $(TESTPKI_FILES)
-#am__append_47 = $(TESTPKI_FILES) tests/ovs-pki.log
-#am__append_48 = clean-pki
+am__append_46 = $(TESTPKI_FILES)
+am__append_47 = $(TESTPKI_FILES) tests/ovs-pki.log
+am__append_48 = clean-pki
 am__append_49 = .h .hstamp
 am__append_50 = $(HSTAMP_FILES)
 am__append_51 = $(HSTAMP_FILES)
@@ -330,8 +330,8 @@ am__append_51 = $(HSTAMP_FILES)
 # effect and a C++ compiler is available, we build a C++ source file
 # that #includes all the public headers, as a way to ensure that they
 # are acceptable as C++.
-#am__append_52 = include/openvswitch/libcxxtest.la
-#am__append_53 = include/openvswitch/cxxtest.cc
+am__append_52 = include/openvswitch/libcxxtest.la
+am__append_53 = include/openvswitch/cxxtest.cc
 #am__append_54 = vswitchd/vswitch.gv vswitchd/vswitch.pic
 #am__append_55 = vtep/vtep.gv vtep/vtep.pic
 #am__append_56 = $(srcdir)/datapath-windows/include/OvsDpInterface.h
@@ -413,15 +413,15 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
 include_openvswitch_libcxxtest_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-#nodist_include_openvswitch_libcxxtest_la_OBJECTS =  \
-#	include/openvswitch/cxxtest.lo
+nodist_include_openvswitch_libcxxtest_la_OBJECTS =  \
+	include/openvswitch/cxxtest.lo
 include_openvswitch_libcxxtest_la_OBJECTS =  \
 	$(nodist_include_openvswitch_libcxxtest_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-#am_include_openvswitch_libcxxtest_la_rpath =
+am_include_openvswitch_libcxxtest_la_rpath =
 am__DEPENDENCIES_1 =
 #am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
 lib_libopenvswitch_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -569,8 +569,8 @@ am__objects_8 = lib/async-append-aio.lo
 #am__objects_10 = lib/if-notifier-bsd.lo \
 #	lib/netdev-bsd.lo lib/rtbsd.lo \
 #	lib/route-table-bsd.lo
-#am__objects_11 = lib/stream-ssl.lo lib/dhparams.lo
-am__objects_12 = lib/stream-nossl.lo
+am__objects_11 = lib/stream-ssl.lo lib/dhparams.lo
+#am__objects_12 = lib/stream-nossl.lo
 #am__objects_13 = lib/dns-resolve.lo
 am__objects_14 = lib/dns-resolve-stub.lo
 am_lib_libopenvswitch_la_OBJECTS = lib/aes128.lo lib/backtrace.lo \
@@ -1806,14 +1806,14 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing autoheader
-AUTOM4TE = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing autom4te
-AUTOMAKE = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing autoheader
+AUTOM4TE = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing autom4te
+AUTOMAKE = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing automake-1.15
 AWK = mawk
 CAPNG_LDADD = 
 CC = $(if $(C:0=),env REAL_CC="gcc" CHECK="$(SPARSE) $(SPARSE_WERROR) -I $(top_srcdir)/include/sparse $(SPARSEFLAGS) $(SPARSE_EXTRA_INCLUDES) " cgcc $(CGCCFLAGS),gcc)
@@ -1842,11 +1842,11 @@ ECHO_T =
 EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
-FLAKE8_WERROR = -
+FLAKE8_WERROR = 
 GREP = /bin/grep
 HAVE_CXX11 = 1
 HAVE_LIBCAPNG = 
-HAVE_OPENSSL = no
+HAVE_OPENSSL = yes
 HAVE_PYTHON = yes
 HAVE_PYTHON2 = yes
 HAVE_PYTHON3 = yes
@@ -1874,7 +1874,7 @@ LT_AGE = 0
 LT_CURRENT = 0
 LT_REVISION = 0
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MSVC64_LDFLAGS = 
@@ -1888,10 +1888,10 @@ NM = /usr/bin/nm -B
 NMEDIT = 
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSL_SUPPORTS_SNI = no
+OPENSSL_SUPPORTS_SNI = yes
 OTOOL = 
 OTOOL64 = 
-OVS_CFLAGS = 
+OVS_CFLAGS =  -Werror -Werror
 OVS_CTAGS_IDENTIFIERS_LIST = -I "OVS_REQ_RDLOCK+ OVS_ACQ_RDLOCK+ OVS_REQ_WRLOCK+ OVS_ACQ_WRLOCK+ OVS_REQUIRES+ OVS_ACQUIRES+ OVS_TRY_WRLOCK+ OVS_TRY_RDLOCK+ OVS_TRY_LOCK+ OVS_GUARDED_BY+ OVS_EXCLUDED+ OVS_RELEASES+ OVS_ACQ_BEFORE+ OVS_ACQ_AFTER+ "
 OVS_LDFLAGS = 
 OVS_LTINFO = -release 2.12 -version-info 0:90
@@ -1903,7 +1903,7 @@ PACKAGE_TARNAME = openvswitch
 PACKAGE_URL = 
 PACKAGE_VERSION = 2.12.90
 PATH_SEPARATOR = :
-PKG_CONFIG = 
+PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
 PKG_CONFIG_PATH = 
 PKIDIR = ${localstatedir}/lib/openvswitch/pki
@@ -1925,19 +1925,19 @@ SHELL = /bin/bash
 SPARSE = sparse
 SPARSEFLAGS = -m64
 SPARSE_EXTRA_INCLUDES = -I /usr/local/include -I /usr/include/x86_64-linux-gnu 
-SPARSE_WERROR = 
+SPARSE_WERROR = -Wsparse-error
 SSL_DIR = 
 SSL_INCLUDES = 
 SSL_LDFLAGS = 
-SSL_LIBS = 
+SSL_LIBS = -lssl -lcrypto
 STRIP = strip
 VERSION = 2.12.90
 VSTUDIO_CONFIG = 
 WARNING_FLAGS =  -Wall -Wextra -Wno-sign-compare -Wpointer-arith -Wformat -Wformat-security -Wswitch-enum -Wunused-parameter -Wbad-function-cast -Wcast-align -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-field-initializers -fno-strict-aliasing -Wswitch-bool -Wlogical-not-parentheses -Wsizeof-array-argument -Wbool-compare -Wshift-negative-value -Wduplicated-cond -Wshadow
-abs_builddir = /home/lctuan/Desktop/ovs
-abs_srcdir = /home/lctuan/Desktop/ovs
-abs_top_builddir = /home/lctuan/Desktop/ovs
-abs_top_srcdir = /home/lctuan/Desktop/ovs
+abs_builddir = /home/lctuan/result_LoOP/ovs
+abs_srcdir = /home/lctuan/result_LoOP/ovs
+abs_top_builddir = /home/lctuan/result_LoOP/ovs
+abs_top_srcdir = /home/lctuan/result_LoOP/ovs
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -1967,7 +1967,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/lctuan/Desktop/ovs/build-aux/install-sh
+install_sh = ${SHELL} /home/lctuan/result_LoOP/ovs/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -3290,16 +3290,16 @@ CHECK_PYFILES = \
 	tests/uuidfilt.py \
 	tests/sendpkt.py
 
-#TESTPKI_FILES = \
-#	tests/testpki-cacert.pem \
-#	tests/testpki-cert.pem \
-#	tests/testpki-privkey.pem \
-#	tests/testpki-req.pem \
-#	tests/testpki-cert2.pem \
-#	tests/testpki-privkey2.pem \
-#	tests/testpki-req2.pem
+TESTPKI_FILES = \
+	tests/testpki-cacert.pem \
+	tests/testpki-cert.pem \
+	tests/testpki-privkey.pem \
+	tests/testpki-req.pem \
+	tests/testpki-cert2.pem \
+	tests/testpki-privkey2.pem \
+	tests/testpki-req2.pem
 
-#OVS_PKI = $(SHELL) $(srcdir)/utilities/ovs-pki.in --dir=tests/pki --log=tests/ovs-pki.log
+OVS_PKI = $(SHELL) $(srcdir)/utilities/ovs-pki.in --dir=tests/pki --log=tests/ovs-pki.log
 OSS_FUZZ_TARGETS = \
 	tests/oss-fuzz/flow_extract_target \
 	tests/oss-fuzz/json_parser_target \
@@ -3427,7 +3427,7 @@ openvswitchinclude_HEADERS = \
 	include/openvswitch/vlog.h \
 	include/openvswitch/nsh.h
 
-#nodist_include_openvswitch_libcxxtest_la_SOURCES = include/openvswitch/cxxtest.cc
+nodist_include_openvswitch_libcxxtest_la_SOURCES = include/openvswitch/cxxtest.cc
 vswitchd_ovs_vswitchd_SOURCES = \
 	vswitchd/bridge.c \
 	vswitchd/bridge.h \
@@ -7260,10 +7260,10 @@ uninstall-man-rst:
 # Manually regenerates lib/dhparams.c.  Not normally necessary since
 # lib/dhparams.c is part of the repository and doesn't normally need
 # updates.
-#generate-dhparams-c:
-#	$(AM_V_GEN)cd $(srcdir) && \
-#	build-aux/generate-dhparams-c > lib/dhparams.c.tmp && \
-#	mv lib/dhparams.c.tmp lib/dhparams.c
+generate-dhparams-c:
+	$(AM_V_GEN)cd $(srcdir) && \
+	build-aux/generate-dhparams-c > lib/dhparams.c.tmp && \
+	mv lib/dhparams.c.tmp lib/dhparams.c
 lib/vswitch-idl.ovsidl: vswitchd/vswitch.ovsschema lib/vswitch-idl.ann
 	$(AM_V_GEN)$(OVSDB_IDLC) annotate $(srcdir)/vswitchd/vswitch.ovsschema $(srcdir)/lib/vswitch-idl.ann > $@.tmp && mv $@.tmp $@
 
@@ -7503,30 +7503,30 @@ tests/idltest.ovsidl: $(IDLTEST_IDL_FILES)
 
 tests/idltest.c: tests/idltest.h
 
-#tests/testpki-cacert.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/switchca/cacert.pem $@
-#tests/testpki-cert.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test-cert.pem $@
-#tests/testpki-req.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test-req.pem $@
-#tests/testpki-privkey.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test-privkey.pem $@
-#tests/testpki-cert2.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test2-cert.pem $@
-#tests/testpki-req2.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test2-req.pem $@
-#tests/testpki-privkey2.pem: tests/pki/stamp
-#	$(AM_V_GEN)cp tests/pki/test2-privkey.pem $@
-#tests/pki/stamp:
-#	$(AM_V_at)rm -f tests/pki/stamp
-#	$(AM_V_at)rm -rf tests/pki
-#	$(AM_V_GEN)$(OVS_PKI) init && \
-#	$(OVS_PKI) req+sign tests/pki/test && \
-#	$(OVS_PKI) req+sign tests/pki/test2 && \
-#	: > tests/pki/stamp
-#clean-pki:
-#	rm -f tests/pki/stamp
-#	rm -rf tests/pki
+tests/testpki-cacert.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/switchca/cacert.pem $@
+tests/testpki-cert.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test-cert.pem $@
+tests/testpki-req.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test-req.pem $@
+tests/testpki-privkey.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test-privkey.pem $@
+tests/testpki-cert2.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test2-cert.pem $@
+tests/testpki-req2.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test2-req.pem $@
+tests/testpki-privkey2.pem: tests/pki/stamp
+	$(AM_V_GEN)cp tests/pki/test2-privkey.pem $@
+tests/pki/stamp:
+	$(AM_V_at)rm -f tests/pki/stamp
+	$(AM_V_at)rm -rf tests/pki
+	$(AM_V_GEN)$(OVS_PKI) init && \
+	$(OVS_PKI) req+sign tests/pki/test && \
+	$(OVS_PKI) req+sign tests/pki/test2 && \
+	: > tests/pki/stamp
+clean-pki:
+	rm -f tests/pki/stamp
+	rm -rf tests/pki
 oss-fuzz-targets: $(OSS_FUZZ_TARGETS)
 
 include/odp-netlink.h: datapath/linux/compat/include/linux/openvswitch.h \
@@ -7541,12 +7541,12 @@ include/odp-netlink-macros.h: include/odp-netlink.h \
 	$(AM_V_GEN)$(run_python) $(srcdir)/build-aux/check-structs -I$(srcdir)/include $< && \
 	touch $@
 $(HSTAMP_FILES): build-aux/check-structs $(openflowinclude_HEADERS)
-#include/openvswitch/cxxtest.cc: \
-#	include/openvswitch/automake.mk $(top_builddir)/config.status
-#	$(AM_V_GEN){ echo "#include <config.h>"; \
-#	for header in $(openvswitchinclude_HEADERS); do	\
-#	  echo $$header; \
-#	done | sed 's,^include/\(.*\)$$,#include <\1>,'; } > $@
+include/openvswitch/cxxtest.cc: \
+	include/openvswitch/automake.mk $(top_builddir)/config.status
+	$(AM_V_GEN){ echo "#include <config.h>"; \
+	for header in $(openvswitchinclude_HEADERS); do	\
+	  echo $$header; \
+	done | sed 's,^include/\(.*\)$$,#include <\1>,'; } > $@
 cxx-check: $(openvswitchinclude_HEADERS)
 	@if LC_ALL=C grep -L 'extern "C"' $^ | \
           $(EGREP) -v 'version.h|compiler.h'; \

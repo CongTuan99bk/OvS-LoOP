@@ -528,9 +528,11 @@ ofproto_create(const char *datapath_name, const char *datapath_type,
     reset_packet_in_counter();
     ofproto->training=1;
     ofproto->writing=0;
+    ofproto->k_thres=0;
     ofproto->last_recorded_n_bytes=0;
     ofproto->last_recorded_n_flow=0;
     ofproto->data_counter=0;
+    ofproto->sum_loop=0;
     ofproto->last_time=time(NULL);
     ofproto->state=(data_t *)malloc(sizeof(data_t)); 
     ofproto->traffic_arr=(float *)malloc(DATANUM*sizeof(float));
@@ -1830,21 +1832,19 @@ void abnormal_detect(struct ofproto *p)
       now_recorded_n_flow=get_packet_in_counter();
       current_flow=((float)(now_recorded_n_flow-p->last_recorded_n_flow))/CYCLE;
       current_traf=((float)(now_recorded_n_bytes-p->last_recorded_n_bytes))/CYCLE;
-
+      
       fp=fopen("home/lctuan/result_LoOP/data_recording.log","a+");
       fprintf(fp, "%f,%f,",current_flow,current_traf);
       fclose(fp);
 
       if(p->training==1)
      {    
-        if(p->data_counter==0)
           fp=fopen("/home/lctuan/result_LoOP/training.log","r");
         /*check training file exist or not .if not exist or not enough data, recording.
           if exists , move to calculating*/
         if(fp==NULL || p->writing == 1)
         {
           p->writing=1;
-          
           fp=fopen("/home/lctuan/result_LoOP/training.log","a+");
           if (current_flow !=0 && current_traf !=0)
           fprintf(fp, "%f,%f\n",current_flow,current_traf);
@@ -1888,21 +1888,23 @@ void abnormal_detect(struct ofproto *p)
           //find threshold
           make_NN_train(p->Data,p->data_counter);
           float temp;
-          float max_sec=0;
+          // float max_sec=0;
           fp= fopen("/home/lctuan/result_LoOP/debug.log","a+");
           for(int i=0;i<p->data_counter;i++)
           {
            // temp=1.0*calc_LOF(p->Data,p->data_counter,p->Data[i]);
            p->Data[i]->LoOP = LoOP(p->Data[i],p->Data,p->data_counter);
            fprintf(fp,"%f,%f,%f\n",p->Data[i]->traffic_norm,p->Data[i]->n_flow_norm,p->Data[i]->LoOP);
+            /*if (p->Data[i]->LoOP >=0 && p->Data[i]->LoOP <=1)          
+               p->sum_loop+=p->Data[i]->LoOP;*/
            temp = 1.0*p->Data[i]->LoOP;
             if((p->loOP_threshold<temp) && (temp >= 0) && (temp < 1))
                p->loOP_threshold=temp;
-               else 
-               if ((temp < p->loOP_threshold) && (temp > max_sec))
-               max_sec = temp;
+            //    else 
+            //    if ((temp < p->loOP_threshold) && (temp > max_sec))
+            //    max_sec = temp;
           }
-          p->loOP_threshold = max_sec;
+          p->loOP_threshold = (2.0/3)*p->loOP_threshold;
             fclose(fp);
           gettimeofday(&end, NULL);
           fp=fopen("/home/lctuan/result_LoOP/time.log","a+");
@@ -1921,23 +1923,32 @@ void abnormal_detect(struct ofproto *p)
       else 
       {
           gettimeofday(&start, NULL);
+          if (current_flow !=0 && current_traf !=0)  //phần fix thêm
+          {
           p->state->traffic_norm=normalize(current_traf,p->traffic_mu,p->traffic_sigma);
           p->state->n_flow_norm=normalize(current_flow,p->flow_mu,p->flow_sigma);
-
+          
          // p->lof_status=calc_LOF(p->Data,p->data_counter,p->state);
          make_NN_udate(p->state,p->Data,p->data_counter);
          p->loOP_status = LoOP_udate(p->state,p->Data,p->data_counter);
 
           if (p->loOP_status > p->loOP_threshold && p->reported == false)
               {
+                  p->k_thres++;
+                  if (p->k_thres >= 10)
+                  {
                   trigger_send_anomaly_detection(p);
                     p->reported = true;
+                  }
+              }
+              else {
+                  p->k_thres =0;
               }
 
           fp= fopen("/home/lctuan/result_LoOP/debug.log1","a+");
           fprintf(fp,"%f,%f,%f,%f\n",p->state->traffic_norm,p->state->n_flow_norm,p->loOP_status,p->loOP_threshold);
           fclose(fp);
-
+          }
           /*gettimeofday(&end, NULL);
           fp= fopen("/home/lctuan/result_LoOP/data_recording.log","a+");
           fprintf(fp,"%f,%lu\n",p->loOP_status,end.tv_sec*1000000+end.tv_usec);
@@ -2047,7 +2058,7 @@ ofproto_run(struct ofproto *p)
     }
     connmgr_run(p->connmgr, handle_openflow);
     abnormal_detect(p);
-    //trigger_send_anomaly_detection(p);    
+    trigger_send_anomaly_detection(p);    
     return error;
 }
 

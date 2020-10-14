@@ -34,7 +34,7 @@
 /* #undef HAVE_AF_XDP */
 
 /* Define to 1 if you have the <atomic> header file. */
-/* #undef HAVE_ATOMIC */
+#define HAVE_ATOMIC 1
 
 /* Define to 1 if you have backtrace(3). */
 #define HAVE_BACKTRACE 1
@@ -125,7 +125,7 @@
 /* #undef HAVE_NET_IF_MIB_H */
 
 /* Define to 1 if OpenSSL is installed. */
-/* #undef HAVE_OPENSSL */
+#define HAVE_OPENSSL 1
 
 /* Define to 1 if `posix_memalign' works. */
 #define HAVE_POSIX_MEMALIGN 1
@@ -244,7 +244,7 @@
 #define LT_OBJDIR ".libs/"
 
 /* Define to 1 if OpenSSL supports Server Name Indication (SNI). */
-/* #undef OPENSSL_SUPPORTS_SNI */
+#define OPENSSL_SUPPORTS_SNI 1
 
 /* Name of package */
 #define PACKAGE "openvswitch"

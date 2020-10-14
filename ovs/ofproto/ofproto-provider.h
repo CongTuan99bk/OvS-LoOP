@@ -165,6 +165,8 @@ struct ofproto {
     bool reported;
     //float lof_threshold;
     float loOP_threshold;  //nguong cho LoOP
+    int k_thres;
+    float sum_loop;
 };
 
 void ofproto_init_tables(struct ofproto *, int n_tables);

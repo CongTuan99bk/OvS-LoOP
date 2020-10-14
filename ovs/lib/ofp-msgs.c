@@ -586,7 +586,7 @@ struct ofpbuf *
 ofpraw_alloc_xid(enum ofpraw raw, uint8_t version, ovs_be32 xid,
                  size_t extra_tailroom)
 {
-    struct ofpbuf *buf = ofpbuf_new(0);
+    struct ofpbuf *buf = ofpbuf_new(extra_tailroom);
     ofpraw_put__(raw, version, xid, extra_tailroom, buf);
     return buf;
 }
@@ -714,7 +714,8 @@ ofpraw_put__(enum ofpraw raw, uint8_t version, ovs_be32 xid,
     const struct raw_instance *instance = raw_instance_get(info, version);
     const struct ofphdrs *hdrs = &instance->hdrs;
     struct ofp_header *oh;
-
+    // struct ofp_error_msg *oh1;
+    
     ofpbuf_prealloc_tailroom(buf, (instance->hdrs_len + info->min_body
                                    + extra_tailroom));
     buf->header = ofpbuf_put_uninit(buf, instance->hdrs_len);
@@ -725,7 +726,7 @@ ofpraw_put__(enum ofpraw raw, uint8_t version, ovs_be32 xid,
     oh->type = hdrs->type;
     oh->length = htons(buf->size);
     oh->xid = xid;
-
+    // oh->xid = 65;
     if (hdrs->type == OFPT_VENDOR) {
         struct ofp_vendor_header *ovh = buf->header;
 

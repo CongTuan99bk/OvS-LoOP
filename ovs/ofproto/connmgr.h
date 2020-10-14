@@ -143,7 +143,7 @@ void connmgr_send_async_msg(struct connmgr *,
                             const struct ofproto_async_msg *);
 /*add prototype of connmgr_send_anomaly_detection*/
 void connmgr_send_anomaly_detection(struct connmgr *);
-
+char* readline(FILE *);
 void ofconn_send_role_status(struct ofconn *ofconn, uint32_t role,
                              uint8_t reason);
 
